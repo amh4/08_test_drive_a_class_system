@@ -21,7 +21,22 @@ RSpec.describe "todo_list" do
       my_todo = TodoList.new()
       first_todo = Todo.new("Walk the dog")
       my_todo.add(first_todo)
-      expect(first_todo.mark_done!).to eq ["Walk the dog"]
+      expect(first_todo.mark_done!).to eq true
+    end
+
+    it "done? returns true if the task is done, else false" do
+      my_todo = TodoList.new()
+      first_todo = Todo.new("Walk the dog")
+      my_todo.add(first_todo)
+      first_todo.mark_done!
+      expect(first_todo.done?).to eq true
+    end
+
+    it "done? returns true if the task is done, else false" do
+      my_todo = TodoList.new()
+      first_todo = Todo.new("Walk the dog")
+      my_todo.add(first_todo)
+      expect(first_todo.done?).to eq false
     end
   end
 end
