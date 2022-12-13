@@ -55,5 +55,32 @@ RSpec.describe "todo_list" do
       second_todo.mark_done!
       expect(my_todo.incomplete).to eq "buy eggs"
     end
+
+    it "incomplete returns error if list is empty" do
+      my_todo = TodoList.new
+      expect{my_todo.incomplete}.to raise_error "Your list is empty"
+    end
+
+   it "returns returns error if no items in list when complete called" do
+    my_todo = TodoList.new
+    expect{my_todo.complete}.to raise_error "Your list is empty"
+   end
+
+   it "give_up! completes off all items on list" do
+    my_todo = TodoList.new
+    first_todo = Todo.new("hoover")
+    second_todo = Todo.new("walk the dog")
+    third_todo = Todo.new("buy eggs")
+    my_todo.add(first_todo)
+    my_todo.add(second_todo)
+    my_todo.add(third_todo)
+    my_todo.give_up!
+    expect(my_todo.complete).to eq "hoover, walk the dog, buy eggs"
+   end
+
+   it "give_up! returns error if list is empty" do
+    my_todo = TodoList.new
+    expect{my_todo.give_up!}.to raise_error "Your list is empty"
+   end
   end
 end
